@@ -1,7 +1,6 @@
 package me.inqu1sitor.credentialsservice.dto;
 
-public record RegCredentialsDto(
-        String name,
+public record ChgCredentialsRequestDto(
         String email,
         String password
 ) {
