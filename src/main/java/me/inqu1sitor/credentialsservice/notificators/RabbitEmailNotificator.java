@@ -31,7 +31,7 @@ public class RabbitEmailNotificator implements EmailNotificator {
             throw new InternalServerError("RabbitMQ Notification Failed");
         }
         if (Boolean.FALSE.equals(isSuccess.get())) {
-            throw new UnableToSendNotificationException(String.format("Email %s incorrect or not exists", dto.receiverEmail()));
+            throw new UnableToSendNotificationException(String.format("Email '%s' incorrect or not exists", dto.receiverEmail()));
         }
     }
 }

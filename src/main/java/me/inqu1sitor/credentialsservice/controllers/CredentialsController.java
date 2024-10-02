@@ -1,5 +1,6 @@
 package me.inqu1sitor.credentialsservice.controllers;
 
+import jakarta.validation.Valid;
 import me.inqu1sitor.credentialsservice.dto.AuthCodeRequestDto;
 import me.inqu1sitor.credentialsservice.dto.CodeResponseDto;
 import me.inqu1sitor.credentialsservice.dto.CredentialsRequestDto;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.NoSuchAlgorithmException;
-
 @RequestMapping(
         value = "${path.controllers.credentials}",
         consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -23,12 +22,12 @@ import java.security.NoSuchAlgorithmException;
 public interface CredentialsController {
 
     @PostMapping
-    default ResponseEntity<CodeResponseDto> registerAccount(@RequestBody final CredentialsRequestDto dto) throws NoSuchAlgorithmException {
+    default ResponseEntity<CodeResponseDto> registerAccount(@RequestBody @Valid final CredentialsRequestDto dto) {
         throw NotImplementedException.defaultInstance();
     }
 
     @PutMapping("${path.endpoints.auth-code}")
-    default ResponseEntity<?> authoriseCode(@RequestBody final AuthCodeRequestDto dto, @CookieValue(value = "CODECOOKIE", required = false) final String cookieValue) {
+    default ResponseEntity<?> authoriseCode(@RequestBody @Valid final AuthCodeRequestDto dto, @CookieValue(value = "CODECOOKIE", required = false) final String cookieValue) {
         throw NotImplementedException.defaultInstance();
     }
 
