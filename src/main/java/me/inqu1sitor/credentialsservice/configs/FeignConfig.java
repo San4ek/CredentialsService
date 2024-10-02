@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile(ProjectProfiles.REST)
 @Configuration
+@Profile(ProjectProfiles.REST)
 @EnableFeignClients(
         basePackageClasses = {
                 MailServiceClient.class
