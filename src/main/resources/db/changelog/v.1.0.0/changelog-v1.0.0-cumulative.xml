@@ -5,6 +5,5 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="xml/22.09.24-create-extension.xml" relativeToChangelogFile="true"/>
-    <include file="xml/22.09.24-create-schema-edulink.xml" relativeToChangelogFile="true"/>
     <include file="xml/22.09.24-create-table-credentials.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

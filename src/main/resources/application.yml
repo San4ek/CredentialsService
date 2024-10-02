@@ -1,7 +1,72 @@
 spring:
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+
+  rabbitmq:
+    host: ${rabbit.host}
+    port: ${rabbit.port}
+    username: ${rabbit.username}
+    password: ${rabbit.password}
+
+  datasource:
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: ${datasource.default.schema}
+    open-in-view: false
+
+    hibernate:
+      ddl-auto: validate
+
+    generate-ddl: false
+
+  main:
+    allow-bean-definition-overriding: true
+
   application:
     name: CredentialsService
 
   liquibase:
-    change-log: classpath:db.changelog/db.changelog-master.xml
+    change-log: classpath:db/changelog/db.changelog-master.xml
     default-schema: edulink
+
+  profiles:
+    active: ${ACTIVE_PROFILE}
+
+rabbit:
+  rpc:
+    routing-key: ${RPC_ROUTING-KEY}
+    direct-exchanger:
+      name: ${RPC_DIRECT-EXCHANGER_NAME}
+
+path:
+  general: /api
+  controllers:
+    credentials: ${path.general}/credentials
+  endpoints:
+    auth-code: /code
+
+remote-services:
+  mail-service:
+    url: http://localhost:8080
+
+authcode:
+  ttl: 300 #sec
+  path: ${path.controllers.credentials}${path.endpoints.auth-code}
+  cookie:
+    name: CODECOOKIE
+    http-only: true
+
+server:
+  port: 8081
+
+logging:
+  level:
+    root: debug

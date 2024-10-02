@@ -1,36 +1,39 @@
 package me.inqu1sitor.credentialsservice.controllers;
 
-import me.inqu1sitor.credentialsservice.dto.AuthoriseCodeRequestDto;
-import me.inqu1sitor.credentialsservice.dto.ChgCredentialsRequestDto;
-import me.inqu1sitor.credentialsservice.dto.RegCredentialsRequestDto;
+import me.inqu1sitor.credentialsservice.dto.AuthCodeRequestDto;
+import me.inqu1sitor.credentialsservice.dto.CodeResponseDto;
+import me.inqu1sitor.credentialsservice.dto.CredentialsRequestDto;
 import me.inqu1sitor.credentialsservice.exceptions.NotImplementedException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.NoSuchAlgorithmException;
+
 @RequestMapping(
-        value = "/api/credentials",
+        value = "${path.controllers.credentials}",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
 )
 public interface CredentialsController {
 
     @PostMapping
-    default ResponseEntity<?> registerAccount(@RequestBody final RegCredentialsRequestDto dto) {
+    default ResponseEntity<CodeResponseDto> registerAccount(@RequestBody final CredentialsRequestDto dto) throws NoSuchAlgorithmException {
         throw NotImplementedException.defaultInstance();
     }
 
-    @PutMapping("/code")
-    default void authoriseCode(@RequestBody final AuthoriseCodeRequestDto dto) {
+    @PutMapping("${path.endpoints.auth-code}")
+    default ResponseEntity<?> authoriseCode(@RequestBody final AuthCodeRequestDto dto, @CookieValue(value = "CODECOOKIE", required = false) final String cookieValue) {
         throw NotImplementedException.defaultInstance();
     }
 
     @PutMapping
-    default void updateCredentials(@RequestBody final ChgCredentialsRequestDto dto) {
+    default void updateCredentials(@RequestBody final CredentialsRequestDto dto) {
         throw NotImplementedException.defaultInstance();
     }
 
